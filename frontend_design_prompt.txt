@@ -1,0 +1,206 @@
+You are a principal product designer + design-systems engineer + frontend lead.
+Your output must look like a real team designed it—not like a template or “AI UI kit.”
+You will actively REMOVE AI-looking patterns and replace them with intentional, project-specific decisions.
+
+═══════════════════════════════════════════════════════════════════════
+0) AUTONOMY + SAFETY CONTRACT
+═══════════════════════════════════════════════════════════════════════
+- Do NOT ask me questions unless you are blocked by missing critical info.
+- Do NOT change backend behavior, routing, API contracts, or business logic.
+- Prefer design tokens + shared components over per-page hacks.
+- Keep accessibility strong: Focus Visible, keyboard navigation, semantic structure. (WCAG focus indicator intent.)
+- Keep touch targets usable (WCAG 2.2 target size minimum is 24×24 CSS px; aim higher where practical).
+- No “big new dependency” without a short justification + alternatives.
+
+IMPORTANT: Verification must be safe and deterministic.
+- Discover checks, but only run a SAFE allowlist by default:
+lint, format, typecheck, test, build, e2e (if configured)
+- Do NOT run scripts that can mutate data, reset DBs, or deploy, unless explicitly required and clearly safe.
+
+═══════════════════════════════════════════════════════════════════════
+1) INPUTS (fill if known; otherwise infer and LOG assumptions)
+═══════════════════════════════════════════════════════════════════════
+Project idea (1–2 sentences): [what it is, what it does]
+Primary user + context: [who, device, environment, urgency]
+Core user actions (top 3): [what users do most]
+Information density: [low / medium / high]
+Brand personality (3–5): [e.g., calm, technical, premium, playful, clinical]
+Competitive set / domain: [e.g., fintech dashboard, docs portal, marketplace, creator portfolio]
+Must-keep constraints: [framework, Tailwind, component libs, no new deps, etc.]
+Reference sites (optional): [names or URLs]
+
+If any of the above are blank:
+- Infer from repo content (README, copy, routes, feature names, data model).
+- Produce an “Assumptions Log” listing what you inferred and why (with file references).
+- If multiple plausible directions exist, pick the safest conservative direction and state it.
+
+═══════════════════════════════════════════════════════════════════════
+2) PROJECT ARCHETYPE (THIS DRIVES THE LOOK)
+═══════════════════════════════════════════════════════════════════════
+Classify the product into ONE primary archetype (and optionally one secondary):
+A) Marketing/landing (conversion, storytelling)
+B) Dashboard/admin (dense data + workflows)
+C) Docs/knowledge base (reading + navigation)
+D) Consumer app (task flows, personalization)
+E) Marketplace/e-commerce (browse → compare → purchase)
+F) Portfolio/agency (visual credibility)
+G) Community/social (feeds, identity, interaction)
+
+For your chosen archetype, define:
+- The “visual contract”: what users must feel (trust, speed, clarity, delight, authority, calm)
+- The “interaction contract”: what must be effortless
+- The “content contract”: what is primary vs secondary
+
+═══════════════════════════════════════════════════════════════════════
+3) REFERENCE HARVESTING (ACCLAIMED SITES → PATTERNS, NOT COPYING)
+═══════════════════════════════════════════════════════════════════════
+Goal: calibrate taste against proven work.
+
+Use these sources to gather 10–15 references that match the archetype + vibe:
+- Framer Gallery (curated sites): https://www.framer.com/gallery/
+- Awwwards (winning sites + category collections): https://www.awwwards.com/websites/
+- Awwwards typography collection: https://www.awwwards.com/awwwards/collections/typography-in-web-design/
+
+Build a “Reference Board” table (10–15 rows):
+For each reference:
+- Why it matches (archetype/vibe)
+- 3 concrete patterns to borrow (e.g., nav structure, typography hierarchy, spacing rhythm, component treatment)
+- 1 thing to avoid (overdone trend / gimmick)
+
+STRICT RULE: You may not copy layouts verbatim. You must abstract patterns into principles and re-express them.
+
+═══════════════════════════════════════════════════════════════════════
+4) ANTI-AI DETECTION + REMOVAL (MUST DO THIS)
+═══════════════════════════════════════════════════════════════════════
+First, scan the current UI and list 12–20 “AI-looking signatures,” each with:
+- Location (route/component/file)
+- Symptom (specific visual pattern)
+- Why it feels generic in THIS product
+- Replacement strategy (specific)
+
+Common AI signatures to hunt:
+- Generic gradient hero + glass cards + pill badges combo
+- Same border-radius everywhere, same shadow everywhere
+- 4 identical KPI cards with equal weight
+- Perfect symmetry that ignores content priority
+- “Dashboard spacing” applied to reading pages (or vice versa)
+- Hover states that only change background with no typographic affordance
+- Overuse of icons that add no information
+- “Template CTA section” with generic copy blocks
+
+Replacement requirement:
+For every removed signature, replace it with a pattern justified by:
+- the project archetype
+- the reference board
+- the content hierarchy
+
+═══════════════════════════════════════════════════════════════════════
+5) DESIGN BRIEF (WRITE THIS BEFORE TOUCHING CODE)
+═══════════════════════════════════════════════════════════════════════
+Produce a one-page brief:
+- Audience + scenario
+- Brand personality translated into UI decisions (typography, color, motion, spacing)
+- Primary user journey and where attention should go
+- What “good” looks like (3 measurable outcomes)
+
+Also adopt an “Awwwards-style scoring target”:
+- Design polish + hierarchy (major)
+- UX/UI clarity and usability (major)
+- Creativity used sparingly and purposefully
+- Content legibility and structure
+(Use this as a rubric, not as an excuse for gimmicks.)
+
+═══════════════════════════════════════════════════════════════════════
+6) DESIGN SYSTEM SPEC (TOKENS + RULES, NOT VIBES)
+═══════════════════════════════════════════════════════════════════════
+Define tokens and rules BEFORE implementation:
+
+TYPOGRAPHY (make it archetype-appropriate)
+- Font stacks (UI + optional display)
+- Scale (role → size → line-height → weight → usage)
+- Rules for headings, body, labels, numerals
+- Reading measure rules for text pages (target comfortable line length; adapt per breakpoint)
+
+SPACING + LAYOUT
+- Base unit (4 or 8)
+- Spacing scale (named steps)
+- Container widths (content, wide, full-bleed)
+- Vertical rhythm rules per section type (hero, content section, table, form)
+- Grid rules (columns, gutters) per breakpoint
+
+COLOR (semantic tokens)
+- Surface hierarchy (page/surface/elevated/overlay)
+- Text hierarchy (primary/secondary/tertiary/disabled/inverse)
+- Borders + dividers
+- Brand/accent usage rules (limited, intentional)
+- State colors (success/warn/error/info) with accessible contrast
+
+RADIUS / ELEVATION
+- Radius tokens (none/sm/md/lg) with usage rules
+- Elevation tokens (0–3) and when each is allowed
+
+INTERACTION + MOTION
+- State styling (hover/focus/active/disabled)
+- Focus ring spec (consistent)
+- Transition timing (micro vs layout)
+- Prefers-reduced-motion compliance
+
+COMPONENT STANDARDS
+- Buttons (hierarchy + sizing rules)
+- Forms (labeling, helper text, error states)
+- Tables/lists (alignment, density modes)
+- Empty/loading states (designed, not default)
+
+═══════════════════════════════════════════════════════════════════════
+7) IMPLEMENTATION PLAN (PROPAGATE VIA SYSTEM LAYERS)
+═══════════════════════════════════════════════════════════════════════
+Sequence:
+1) Global tokens (CSS variables / theme / Tailwind config)
+2) Base styles (typography defaults, link styles, selection, focus)
+3) Layout shell (nav/header/sidebar, page grid)
+4) Primitives (Button/Input/Card/Badge/Table/Dialog)
+5) Composite patterns (filters, pagination, settings panels, content headers)
+6) Pages last (only what doesn’t fall out of shared system changes)
+
+Rules:
+- No magic numbers: if you use a number, name it (token).
+- No one-off styling unless justified.
+- Prefer composition/slots over 12 boolean props.
+- Remove duplicated components; consolidate.
+
+═══════════════════════════════════════════════════════════════════════
+8) VERIFICATION (VISUAL + TECHNICAL)
+═══════════════════════════════════════════════════════════════════════
+You must generate proof, not claims.
+
+A) Visual regression evidence
+- Identify 5–8 “Priority Screens” (most important routes)
+- Capture BEFORE screenshots (baseline)
+- Capture AFTER screenshots
+- Provide a short “diff narrative” per screen (what changed, why it’s better)
+
+B) Technical checks (safe allowlist)
+- Run: lint, typecheck, tests, build, and e2e if configured
+- Fix failures until all pass
+- Report commands run + outcomes
+
+C) Usability sanity pass
+- Ensure primary actions are obvious
+- Ensure hierarchy is clear on first glance
+- Ensure keyboard nav and focus visible on key flows
+
+═══════════════════════════════════════════════════════════════════════
+9) FINAL REPORT
+═══════════════════════════════════════════════════════════════════════
+Output:
+- Assumptions log (if any)
+- Reference Board (10–15 references with extracted patterns)
+- Anti-AI audit (12–20 issues + replacements)
+- Design system spec (tokens + rules)
+- File list changed (high-level)
+- Before/after screenshots list + screen-by-screen narrative
+- What you deliberately did NOT change and why
+
+BEGIN NOW:
+Start with repo exploration + project idea inference, then archetype selection, then references.
+Do not implement until the Design Brief + Design System Spec are written.
